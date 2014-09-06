@@ -6,4 +6,11 @@ router.get('/', function(req, res) {
     res.render('index', { title: 'Express' });
 });
 
+
+router.get("/register", function (req, res) {
+   res.render('register', {title: '帐号注册'});
+});
+
+
+
 module.exports = router;
