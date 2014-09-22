@@ -1,14 +1,17 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
 router.get('/', function(req, res) {
-    res.render('index', { title: 'Express' });
+	if (req.session.user){
+		res.render('index', { title: 'Express' });
+	}else{
+		res.render('account/login', {title: 'Login'});
+	}
 });
 
 
 router.get("/register", function (req, res) {
-   res.render('register', {title: '帐号注册'});
+	res.render('account/register', {title: '帐号注册'});
 });
 
 

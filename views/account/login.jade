@@ -1,0 +1,40 @@
+extends ../layout
+block content
+  div.container
+    div.col-md-12
+      div.panel.panel-primary
+        div.panel-heading Login
+        div.panel-body
+          form.form-horizontal
+            div.form-group
+              lable.col-sm-2.control-label Email
+              div.col-sm-10
+                input.form-control(type='email', id='email', placeholder='请输入您的Email')
+            div.form-group
+              lable.col-sm-2.control-label 密码
+              div.col-sm-10
+                input.form-control(type='password', id='password', placeholder='请输入登录密码')
+            div.form-group
+              div.col-sm-10.col-sm-offset-2
+                div.checkbox
+                  label
+                    input(type='checkbox')
+                    记住我
+            div.form-group
+              div.col-sm-10.col-sm-offset-2
+                button.btn.btn-primary#btnLogin(type='button') 登录
+            div.form-group
+              div.col-sm-10.col-sm-offset-2
+                没有帐号？
+                a(href='/register') 现在注册
+
+
+  script.
+    $(function(){
+      $("#btnLogin").click(function(){
+        alert(0);
+        $.post("/login", {email:$("#email").val(), password:$("#password").val()}, function(){
+
+        },'json');
+      })
+    });
