@@ -1,18 +1,43 @@
 var express = require('express');
 var router = express.Router();
+var account = require('../logic/account');
 
 router.get('/', function(req, res) {
-	if (req.session.user){
-		res.render('index', { title: 'Express' });
-	}else{
-		res.render('account/login', {title: 'Login'});
-	}
+  if (req.session.user){
+    res.render('index', { title: '首页' });
+  }else{
+    res.redirect('/login');
+  }
 });
 
 
 router.get("/register", function (req, res) {
-	res.render('account/register', {title: '帐号注册'});
+  account.register_ui(req, res);
 });
+
+
+router.get("/login", function (req, res) {
+  account.login_ui(req, res);
+});
+router.post("/login", function (req, res) {
+  account.login_act(req, res);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

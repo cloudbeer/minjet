@@ -20,8 +20,18 @@ block content
                 input.form-control#repassword(type='password', placeholder='请再次输入登录密码')
             div.form-group
               div.col-sm-10.col-sm-offset-2
-                button.btn.btn-primary#btnRegister(type='button') 注册
+                button.btn.btn-primary#btnRegister(type='submit') 注册
             div.form-group
               div.col-sm-10.col-sm-offset-2
-                已经注册？
+                | 已经注册？ 
                 a(href='/login') 现在登录
+
+  script.
+    $(function(){
+      $("#btnRegister").click(function(){
+        $.post("/login", {email:$("#email").val(), password:$("#password").val()}, function(res){
+          alert(res.msg);
+        },'json');
+        return false;
+      })
+    });

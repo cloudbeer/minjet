@@ -3,7 +3,7 @@ block content
   div.container
     div.col-md-12
       div.panel.panel-primary
-        div.panel-heading Login
+        div.panel-heading 登录
         div.panel-body
           form.form-horizontal
             div.form-group
@@ -19,22 +19,22 @@ block content
                 div.checkbox
                   label
                     input(type='checkbox')
-                    记住我
+                    | 记住我
             div.form-group
               div.col-sm-10.col-sm-offset-2
-                button.btn.btn-primary#btnLogin(type='button') 登录
+                button.btn.btn-primary#btnLogin(type='submit') 登录
             div.form-group
               div.col-sm-10.col-sm-offset-2
-                没有帐号？
+                | 没有帐号？
                 a(href='/register') 现在注册
 
 
   script.
     $(function(){
       $("#btnLogin").click(function(){
-        alert(0);
-        $.post("/login", {email:$("#email").val(), password:$("#password").val()}, function(){
-
+        $.post("/login", {email:$("#email").val(), password:$("#password").val()}, function(res){
+          alert(res.msg);
         },'json');
+        return false;
       })
     });
