@@ -26,8 +26,7 @@ var DB = {
     });
   },
   existsExact: function(__table, where, callback){
-    var sql = SQL.existsExact(__table, where);
-    
+    var sql = SQL.existsExact(__table, where);    
     pool.query(sql, function(err, rows, fields){
       if (err) throw err;
       callback(rows[0].count>0);

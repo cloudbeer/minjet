@@ -70,4 +70,3 @@ var SQL = {
 }
 
 module.exports = SQL;
-
