@@ -6,6 +6,14 @@ Agile Project Management 敏捷项目管理
 
 Start: bin/www
 
+###一些约定
+
+web json 数据交互的格式：
+成功的请求
+{code: 1}
+失败的请求
+{code: 0, message:'登录失败'} 
+
 
 ###Simple ORM 
 
