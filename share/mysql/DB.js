@@ -1,4 +1,5 @@
 var mysql = require("mysql");
+var errors = require('../errors');
 /*
 var pool = mysql.createPool({
   connectionLimit: 10,
@@ -41,18 +42,20 @@ var DB = {
   exists: function(table, where, params, callback){
     var sql = "select count(*) as count from " + table + " where " + where;
     pool.query(sql, params, function(err, rows, fields){
-      if (err) throw err;
-      callback(rows[0].count>0);
+      callback(err, rows[0].count>0);
     });
   },
   loadById: function(table, id, callback){
     load(table, "id=?", [id], callback);
   },
   load: function(table, where, params, callback){
-    var sql = "select * from " + table + " " + where;   
+    var sql = "select * from " + table + " where " + where;  
     pool.query(sql, params, function(err, rows, fields){
-      if (err) throw err;
-      callback(rows[0]);
+      if (rows.length<1){
+        callback(new errors.NotFound());
+        return;
+      }
+      callback(err, rows[0]);
     });
   },
   list: function(table, where, params, callback, pageSize, page){
@@ -62,25 +65,28 @@ var DB = {
       var start = (page - 1) * pageSize;
       limitStr = " limit " + start + ", " + pageSize;
     }
-    var sql ="select * from " + __table + " where " + where + limitStr;
+    var sql ="select * from " + table + " where " + where + limitStr;
     pool.query(sql, params, function(err, rows, fields){
-      if (err) throw err;
-      callback(rows);
+      callback(err, rows);
     });
   },
   count: function(table, where, params, callback){
     var sql ="select count(*) as count from " + table + " where " + where;
     pool.query(sql, params, function(err, rows, fields){
-      if (err) throw err;
-      callback(rows[0].count);
+      callback(err, rows[0].count);
     });
   },
   query: function(sql, params, callback){
     pool.query(sql, params, function(err, rows, fields){
-      if (err) throw err;
-      callback(rows, fields);
+      callback(err, rows, fields);
     });    
   }
 }
 
 module.exports = DB;
+
+/*
+pool.query("select * from account where email=?", ['cloudbeer@gmail.com'], function(err, rows, fields){
+  console.log(rows);
+})
+*/

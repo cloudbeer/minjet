@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var account = require('../logic/account');
+var Account = require('../controllers/Account');
 
 router.get('/', function(req, res) {
   if (req.session.user){
@@ -12,18 +12,18 @@ router.get('/', function(req, res) {
 
 
 router.get("/register", function (req, res) {
-  account.register_ui(req, res);
+  Account.register_ui(req, res);
 });
 router.post("/register", function (req, res) {
-  account.register_act(req, res);
+  Account.register_act(req, res);
 });
 
 
 router.get("/login", function (req, res) {
-  account.login_ui(req, res);
+  Account.login_ui(req, res);
 });
 router.post("/login", function (req, res) {
-  account.login_act(req, res);
+  Account.login_act(req, res);
 });
 
 

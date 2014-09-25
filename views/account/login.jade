@@ -33,7 +33,11 @@ block content
     $(function(){
       $("#btnLogin").click(function(){
         $.post("/login", {email:$("#email").val(), password:$("#password").val()}, function(res){
-          alert(res.msg);
+          if (res.code==0){
+            alert(res.error);
+            return;
+          }
+          window.location="/";
         },'json');
         return false;
       })
