@@ -21,12 +21,12 @@ DB.save("account", {email: 'cloudbeer@gmail.com', nick: 'cloudbeer', password: '
   //...
 });
 
-DB.load('account', "email=:email", {email: 'cloudbeer@gmail.com'} function(error, account){
+DB.load('account', "email=:email", {email: 'cloudbeer@gmail.com'}, function(err, account){
   //...
 });
 
 DB.exists('account', "email=?", ['cloudbeer@gmail.com'], function(err, exists){
-  console.log(exists);
+  //...
 });
 
 ```
