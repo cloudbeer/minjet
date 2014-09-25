@@ -1,11 +1,17 @@
 var db = require('../share/mysql/DB');
+var utils = require('../share/utils');
+var errors = require('../share/errors'); 
 
 var AccountService = {
   login: function(email, password, callback){
-    console.log(email);
     db.load("account", "email=?", [email], function(err, account){
       if (err){
         if (callback) callback(err);
+        return;
+      }
+      var dbPassword = account.password;
+      if (dbPassword!=utils.genPassword(password, account.salt)){
+        if (callback) callback(new errors.PasswordWrong());
         return;
       }
       callback(err, account);

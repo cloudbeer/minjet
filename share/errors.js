@@ -10,6 +10,13 @@ module.exports.Duplicated = Duplicated = function(message) {
 }
 Duplicated.prototype = Error.prototype;
 
+module.exports.PasswordWrong = PasswordWrong = function(message) {
+    this.name = "PasswordWrong";
+    this.message = (message || "Password is wrong.");
+}
+PasswordWrong.prototype = Error.prototype;
+
+
 
 
 

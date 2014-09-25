@@ -1,6 +1,6 @@
 var mysql = require("mysql");
 var errors = require('../errors');
-/*
+
 var pool = mysql.createPool({
   connectionLimit: 10,
   host: "skyrds01.mysql.rds.aliyuncs.com",
@@ -8,7 +8,7 @@ var pool = mysql.createPool({
   password: "CoKHLUPcRT4c3hpgTDVTJddf",
   database: "minjet"
 });
-*/
+/*
 var pool = mysql.createPool({
   connectionLimit: 10,
   host: "127.0.0.1",
@@ -16,7 +16,7 @@ var pool = mysql.createPool({
   password: "zhwell",
   database: "minjet"
 });
-
+*/
 
 
 var DB = {
@@ -42,6 +42,13 @@ var DB = {
   exists: function(table, where, params, callback){
     var sql = "select count(*) as count from " + table + " where " + where;
     pool.query(sql, params, function(err, rows, fields){
+      if (err){
+        callback(err);
+        return;
+      }
+      if (!rows){
+        callback(err, false);
+      }
       callback(err, rows[0].count>0);
     });
   },
@@ -51,7 +58,7 @@ var DB = {
   load: function(table, where, params, callback){
     var sql = "select * from " + table + " where " + where;  
     pool.query(sql, params, function(err, rows, fields){
-      if (rows.length<1){
+      if (!rows || rows.length<1){
         callback(new errors.NotFound());
         return;
       }
