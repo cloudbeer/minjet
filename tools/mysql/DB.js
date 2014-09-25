@@ -1,6 +1,13 @@
 var mysql = require("mysql");
-var SQL = require("./SQL");
-
+/*
+var pool = mysql.createPool({
+  connectionLimit: 10,
+  host: "skyrds01.mysql.rds.aliyuncs.com",
+  user: "minjet",
+  password: "CoKHLUPcRT4c3hpgTDVTJddf",
+  database: "minjet"
+});
+*/
 var pool = mysql.createPool({
   connectionLimit: 10,
   host: "127.0.0.1",
@@ -10,58 +17,66 @@ var pool = mysql.createPool({
 });
 
 
+
 var DB = {
-  save: function(model){
-    var sql = SQL.save(model);
-    pool.query(sql, function(err, rows, fields, callback){
-      if (err) throw err;
-      console.log(rows);
+  save: function(table, model, callback){
+    var keyCond = "", sql = "insert into ";
+    var isInsert = true;
+    if (model['id']!==undefined){
+        keyCond = "where id=" + model['id'];
+        sql = "update ";
+        isInsert = false;    
+    }
+    sql += table + " set ? " + keyCond;
+    delete model.id;
+    pool.query(sql, model, function(err, result){
+      if (isInsert) model.id = result.insertId;
+      if (callback){
+        callback(err, model);
+      } else{
+        throw err;
+      }
     });
   },
-  existsWhere: function(__table, where, callback){
-    var sql = SQL.existsWhere(__table, where);
-    pool.query(sql, function(err, rows, fields){
+  exists: function(table, where, params, callback){
+    var sql = "select count(*) as count from " + table + " where " + where;
+    pool.query(sql, params, function(err, rows, fields){
       if (err) throw err;
       callback(rows[0].count>0);
     });
   },
-  existsExact: function(__table, where, callback){
-    var sql = SQL.existsExact(__table, where);    
-    pool.query(sql, function(err, rows, fields){
-      if (err) throw err;
-      callback(rows[0].count>0);
-    });
+  loadById: function(table, id, callback){
+    load(table, "id=?", [id], callback);
   },
-  load: function(__table, id, callback){
-    var sql = SQL.load(__table, id);    
-    pool.query(sql, function(err, rows, fields){
+  load: function(table, where, params, callback){
+    var sql = "select * from " + table + " " + where;   
+    pool.query(sql, params, function(err, rows, fields){
       if (err) throw err;
       callback(rows[0]);
     });
   },
-  loadWhere: function(__table, where, callback){
-    var sql = SQL.loadWhere(__table, where);    
-    pool.query(sql, function(err, rows, fields){
-      if (err) throw err;
-      callback(rows[0]);
-    });
-  },
-  listWhere: function(__table, where, callback, pageSize, page){
-    var sql = SQL.listWhere(__table, where, pageSize, page);
-    pool.query(sql, function(err, rows, fields){
+  list: function(table, where, params, callback, pageSize, page){
+    var limitStr = "";
+    if (pageSize!=null && pageSize>0){
+      if (!page) page = 1;
+      var start = (page - 1) * pageSize;
+      limitStr = " limit " + start + ", " + pageSize;
+    }
+    var sql ="select * from " + __table + " where " + where + limitStr;
+    pool.query(sql, params, function(err, rows, fields){
       if (err) throw err;
       callback(rows);
     });
   },
-  countWhere: function(__table, where, callback){
-    var sql = SQL.countWhere(__table, where);
-    pool.query(sql, function(err, rows, fields){
+  count: function(table, where, params, callback){
+    var sql ="select count(*) as count from " + table + " where " + where;
+    pool.query(sql, params, function(err, rows, fields){
       if (err) throw err;
       callback(rows[0].count);
     });
   },
-  query: function(sql, callback){
-    pool.query(sql, function(err, rows, fields){
+  query: function(sql, params, callback){
+    pool.query(sql, params, function(err, rows, fields){
       if (err) throw err;
       callback(rows, fields);
     });    

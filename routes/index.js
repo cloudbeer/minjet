@@ -14,6 +14,9 @@ router.get('/', function(req, res) {
 router.get("/register", function (req, res) {
   account.register_ui(req, res);
 });
+router.post("/register", function (req, res) {
+  account.register_act(req, res);
+});
 
 
 router.get("/login", function (req, res) {

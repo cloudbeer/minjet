@@ -19,6 +19,10 @@ block content
               div.col-sm-10
                 input.form-control#repassword(type='password', placeholder='请再次输入登录密码')
             div.form-group
+              lable.col-sm-2.control-label 昵称
+              div.col-sm-10
+                input.form-control#nick(type='text', placeholder='请输入您的昵称')
+            div.form-group
               div.col-sm-10.col-sm-offset-2
                 button.btn.btn-primary#btnRegister(type='submit') 注册
             div.form-group
@@ -29,8 +33,18 @@ block content
   script.
     $(function(){
       $("#btnRegister").click(function(){
-        $.post("/login", {email:$("#email").val(), password:$("#password").val()}, function(res){
-          alert(res.msg);
+        $.post("/register", 
+        {
+          email:$("#email").val(), 
+          password:$("#password").val(), 
+          nick: $("#nick").val()
+        }, 
+        function(res){
+          if (res.code==0){
+            alert(res.error);
+            return;
+          }
+          alert("注册成功");
         },'json');
         return false;
       })
