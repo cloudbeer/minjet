@@ -4,13 +4,6 @@ var ProjectService = require('../services/ProjectService');
 
 var Project = {
   edit_ui: function(req, res){
-    var id = req.params.id;
-    var title="创建项目";
-    if (id) {
-      title="编辑项目";
-    }
-
-    res.render('project/edit', {title: title});
   },
   save: function(req,res){
     ProjectService.save(req.body, req.session.user.id, function(err, project){

@@ -2,7 +2,7 @@ var AccountService = require('../services/AccountService');
 
 var Account = {
   login_ui: function(req, res){
-    res.render('account/login', {title: '登录', back: req.query.back});
+
   },
   login_act: function(req, res){
     var email = req.body.email;
@@ -18,7 +18,6 @@ var Account = {
     });
   },
   register_ui: function(req, res){
-    res.render('account/register', {title: '帐号注册'});
   },
   register_act: function(req, res){
     var email = req.body.email;
