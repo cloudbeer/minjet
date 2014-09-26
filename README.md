@@ -1,4 +1,4 @@
-minjet
+Minjet
 ======
 
 Agile Project Management 敏捷项目管理
