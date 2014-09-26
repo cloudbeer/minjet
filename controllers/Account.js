@@ -1,23 +1,13 @@
-
-var errors = require('../share/errors'); 
 var AccountService = require('../services/AccountService');
 
 var Account = {
   login_ui: function(req, res){
-    res.render('account/login', {title: '登录'});
+    res.render('account/login', {title: '登录', back: req.query.back});
   },
   login_act: function(req, res){
     var email = req.body.email;
     var password = req.body.password;
     AccountService.login(email, password, function(err, account){ 
-      if (err.name="NotFound"){
-        res.send({code: 0, error: "登录失败1"}); 
-        return;
-      }           
-      if (err.name=="PasswordWrong"){
-        res.send({code: 0, error: "登录失败2"}); 
-        return;
-      }
       if (err) {
         res.send({code: 0, error: err.message});
         return;
@@ -42,7 +32,7 @@ var Account = {
       }
     });
   }
-}
+};
 
 module.exports = Account;
 
