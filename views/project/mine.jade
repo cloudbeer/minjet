@@ -5,18 +5,13 @@ block content
       div.panel.panel-primary
         div.panel-heading #{title}
         div.panel-body
-          form.form-horizontal
-            div.form-group
-              lable.col-sm-2.control-label 项目名称
-              div.col-sm-10
-                input.form-control#title(type='email', placeholder='请输入项目名称')
-            div.form-group
-              lable.col-sm-2.control-label 项目简介
-              div.col-sm-10
-                textarea.form-control#content
-            div.form-group
-              div.col-sm-10.col-sm-offset-2
-                button.btn.btn-primary#btnSave(type='submit') Save
+          table.table
+            tr
+              th 项目名称
+              th 介绍
+            tr
+              td
+              td
 
   script.
     $(function(){

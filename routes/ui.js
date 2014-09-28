@@ -16,6 +16,10 @@ router.get("/register", function (req, res) {
 router.get("/login", function (req, res) {
   res.render('account/login', {title: '登录', back: req.query.back});
 });
+//我的项目列表
+router.get("/project/mine", function(req, res){
+  res.render('project/mine', {title: '我的项目'});
+});
 //项目详情
 router.get("/project/detail/:id", function(req, res){
 
