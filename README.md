@@ -3,8 +3,9 @@ Minjet
 
 Agile Project Management 敏捷项目管理
 
-
-Start: bin/www
+* 服务器端代码库：npm install
+* 客户端代码库： bower install
+* 启动: bin/www
 
 ###一些约定
 
