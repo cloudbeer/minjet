@@ -7,6 +7,13 @@ Agile Project Management 敏捷项目管理
 * 客户端代码库： bower install
 * 启动: bin/www
 
+## 一些技术
+
+* This is a Express web app
+* Server side Template engine is Jade
+* Client side Template engine is doT
+* Orm is not used.... as fowlling.
+
 ###一些约定
 
 web json 数据交互的格式：

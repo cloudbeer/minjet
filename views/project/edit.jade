@@ -21,7 +21,7 @@ block content
   script.
     $(function(){
       $("#btnSave").click(function(){
-        $.post("/project/save", {title:$("#title").val(), content:$("#content").val()}, function(res){
+        $.post("/api/project/save", {title:$("#title").val(), content:$("#content").val()}, function(res){
           if (res.code==0){
             alert(res.error);
             return false;
