@@ -6,13 +6,23 @@ var utils = require('../share/utils')
 
 var Account = require('../controllers/Account');
 router.post("/api/register", function (req, res) {
-  Account.register_act(req, res);
+  Account.register(req, res);
 });
 
 router.post("/api/login", function (req, res) {
-  Account.login_act(req, res);
+  Account.login(req, res);
 });
 
+router.get("/api/account/find_nick/:nick", function(req, res){
+  if (utils.isLogin(req, res, true)) {
+    Account.findByNick(req, res);
+  }
+});
+router.get("/api/account/list_nick/:nick", function(req, res){
+  if (utils.isLogin(req, res, true)) {
+    Account.listByNick(req, res);
+  }
+});
 
 var Project = require('../controllers/Project');
 router.get("/api/project/mine", function(req, res){
@@ -22,8 +32,11 @@ router.get("/api/project/mine", function(req, res){
 });
 
 router.get("/api/project/detail/:id", function(req, res){
-
+  if (utils.isLogin(req, res, true)) {
+    Project.detail(req, res);
+  }
 });
+
 
 router.post("/api/project/save", function(req, res){
   if (utils.isLogin(req, res, true)){
