@@ -1,0 +1,34 @@
+extends ../layout
+block content
+  .container
+    .col-md-12
+      a.btn.btn-primary(href='/project/edit') 新建
+      .panel.panel-primary
+        .panel-heading #{title}
+        .panel-body
+          script#projects(type='text/html')
+            table.table
+              tr
+                th 标题
+                th 内容
+                th 管理
+              | {{~it:p }}
+              tr
+                td {{=p.title}}
+                td {{=p.content}}
+                td 编辑 删除
+              | {{~}}
+
+  script.
+    $(function(){
+      $.get("/api/project/mine", null, function(res){
+        if (res.code==0){
+            alert(res.error);
+            return;
+        }
+        var dot = doT.template($('#temp').html());
+        var results = dot(res.data);
+        $('#projects').replaceWith($(results));
+      });
+    });
+  script(src='/res/libs/doT/doT.min.js')

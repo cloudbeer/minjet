@@ -1,0 +1,34 @@
+extends ../layout
+block content
+  div.container
+    div.col-md-12
+      div.panel.panel-primary
+        div.panel-heading #{title}
+        div.panel-body
+          form.form-horizontal
+            div.form-group
+              lable.col-sm-2.control-label 项目名称
+              div.col-sm-10
+                input.form-control#title(type='email', placeholder='请输入项目名称')
+            div.form-group
+              lable.col-sm-2.control-label 项目简介
+              div.col-sm-10
+                textarea.form-control#content
+            div.form-group
+              div.col-sm-10.col-sm-offset-2
+                button.btn.btn-primary#btnSave(type='button') Save
+
+  script.
+    $(function(){
+      $("#btnSave").click(function(){
+        $.post("/api/project/save", {title:$("#title").val(), content:$("#content").val()}, function(res){
+          if (res.code==0){
+            alert(res.error);
+            return false;
+          }
+          window.location="/project/mine";
+          return false;
+        },'json');
+        return false;
+      });
+    });

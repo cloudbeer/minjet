@@ -7,9 +7,6 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 
 
-
-var routes = require('./routes/index');
-
 var app = express();
 
 //session setup
@@ -29,9 +26,14 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'res')));
 
-app.use('/', routes);
+app.use('/res', express.static(path.join(__dirname, 'res')));
+
+var routes_ui = require('./routes/ui');
+var routes_rest = require('./routes/rest');
+
+app.use('/', routes_ui);
+app.use('/', routes_rest);
 
 
 // view engine setup

@@ -22,7 +22,7 @@ block content
                     | 记住我
             div.form-group
               div.col-sm-10.col-sm-offset-2
-                button.btn.btn-primary#btnLogin(type='submit') 登录
+                button.btn.btn-primary#btnLogin(type='button') 登录
             div.form-group
               div.col-sm-10.col-sm-offset-2
                 | 没有帐号？
@@ -32,12 +32,12 @@ block content
   script.
     $(function(){
       $("#btnLogin").click(function(){
-        $.post("/login", {email:$("#email").val(), password:$("#password").val()}, function(res){
+        $.post("/api/login", {email:$("#email").val(), password:$("#password").val()}, function(res){
           if (res.code==0){
             alert(res.error);
-            return;
           }
-          window.location="/";
+          window.location="#{back}";
+          return false
         },'json');
         return false;
       })
