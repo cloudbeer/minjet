@@ -1,10 +1,7 @@
 var AccountService = require('../services/AccountService');
 
 var Account = {
-  login_ui: function(req, res){
-
-  },
-  login_act: function(req, res){
+  login: function(req, res){
     var email = req.body.email;
     var password = req.body.password;
     AccountService.login(email, password, function(err, account){ 
@@ -17,9 +14,7 @@ var Account = {
       
     });
   },
-  register_ui: function(req, res){
-  },
-  register_act: function(req, res){
+  register: function(req, res){
     var email = req.body.email;
     var password = req.body.password;
     var nick = req.body.nick;
@@ -30,6 +25,26 @@ var Account = {
         res.send({code: 1});
       }
     });
+  },
+  listByNick: function(req, res){
+    var key = req.params.nick;
+    AccountService.listByNick(key, function(err, accounts){
+      if (err){
+        res.send({code: 0, error: err.message});
+      }else{
+        res.send({code: 1, data: accounts});
+      }
+    })
+  },
+  findByNick: function(req, res){
+    var key = req.params.nick;
+    AccountService.findByNick(key, function(err, account){
+      if (err){
+        res.send({code: 0, error: err.message});
+      }else{
+        res.send({code: 1, data: account});
+      }
+    })
   }
 };
 

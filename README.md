@@ -12,7 +12,7 @@ Agile Project Management 敏捷项目管理
 * This is a Express web app
 * Server side Template engine is Jade
 * Client side Template engine is doT
-* Orm is not used.... as fowlling.
+* Orm .... 自己写的简单的ORM，参考下面
 
 
 ###一些约定
@@ -52,19 +52,25 @@ DB.exists('account', "email=?", ['cloudbeer@gmail.com'], function(err, exists){
 ```
 
 ##API for front-end
-#### /api/login
+#### POST /api/login
 
-POST email, password
+ email, password
 
-#### /api/register
+#### POST /api/register
 
-POST email, password, nick
+ email, password, nick
 
-#### /api/project/mine
+#### GET /api/account/find_nick/:nick
 
-GET 无参数
+精确找到 nick 的用户
 
-需要先登录才能访问
+#### GET /api/account/list_nick/:nick
+
+模糊匹配 nick 的用户列表
+
+#### GET /api/project/mine
+
+我创建的项目，需要先登录才能访问
 
 #### /api/project/save
 
