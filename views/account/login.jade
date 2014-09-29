@@ -32,7 +32,7 @@ block content
   script.
     $(function(){
       $("#btnLogin").click(function(){
-        $.post("/login", {email:$("#email").val(), password:$("#password").val()}, function(res){
+        $.post("/api/login", {email:$("#email").val(), password:$("#password").val()}, function(res){
           if (res.code==0){
             alert(res.error);
           }

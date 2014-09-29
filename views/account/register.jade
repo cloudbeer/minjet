@@ -33,7 +33,7 @@ block content
   script.
     $(function(){
       $("#btnRegister").click(function(){
-        $.post("/register", 
+        $.post("/api/register",
         {
           email:$("#email").val(), 
           password:$("#password").val(), 

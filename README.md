@@ -14,6 +14,7 @@ Agile Project Management 敏捷项目管理
 * Client side Template engine is doT
 * Orm is not used.... as fowlling.
 
+
 ###一些约定
 
 web json 数据交互的格式：
@@ -49,6 +50,28 @@ DB.exists('account', "email=?", ['cloudbeer@gmail.com'], function(err, exists){
 });
 
 ```
+
+##API for front-end
+#### /api/login
+
+POST email, password
+
+#### /api/register
+
+POST email, password, nick
+
+#### /api/project/mine
+
+GET 无参数
+
+需要先登录才能访问
+
+#### /api/project/save
+
+POST title content 等
+
+#### 更多api尽在文件/routes/rest.js，更多数据结构参考数据库设计文档
+
 
 ###TODO
 * register.jade 没有做前端校验。
