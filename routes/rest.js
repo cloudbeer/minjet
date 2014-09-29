@@ -5,11 +5,11 @@ var utils = require('../share/utils')
 
 
 var Account = require('../controllers/Account');
-router.post("/register", function (req, res) {
+router.post("/api/register", function (req, res) {
   Account.register_act(req, res);
 });
 
-router.post("/login", function (req, res) {
+router.post("/api/login", function (req, res) {
   Account.login_act(req, res);
 });
 
