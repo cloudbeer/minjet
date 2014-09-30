@@ -58,9 +58,7 @@ var errors = require('./share/errors');
 
 app.use(function (err, req, res, next) {
   if (req.xhr) {
-    res.send(err.status || 488, err);
-    if (app.get('env') === 'development') {
-    }
+    res.send(err.status || 288, err);
   } else if (err.code === errors.NOT_LOGIN.code) {
     res.redirect("/login?back=" + encodeURIComponent(err.back));
   } else {

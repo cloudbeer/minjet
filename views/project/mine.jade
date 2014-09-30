@@ -22,11 +22,11 @@ block content
   script.
     $(function(){
       $.get("/api/project/mine", null, function(res){
-        if (res.code==0){
-            alert(res.error);
+        if (res.code!=1){
+            alert(res.message);
             return;
         }
-        var dot = doT.template($('#temp').html());
+        var dot = doT.template($('#projects').html());
         var results = dot(res.data);
         $('#projects').replaceWith($(results));
       });

@@ -22,8 +22,8 @@ block content
     $(function(){
       $("#btnSave").click(function(){
         $.post("/api/project/save", {title:$("#title").val(), content:$("#content").val()}, function(res){
-          if (res.code==0){
-            alert(res.error);
+          if (res.code!=1){
+            alert(res.message);
             return false;
           }
           window.location="/project/mine";
