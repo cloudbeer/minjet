@@ -37,7 +37,7 @@ router.get("/api/project/detail/:id", function(req, res, next){
 router.post("/api/project/save", function(req, res, next){
   Project.save(req, res, next);
 });
-router.post("/api/project/delete", function(req, res, next){
+router.get("/api/project/delete", function(req, res, next){
   Project.delete(req, res, next);
 });
 

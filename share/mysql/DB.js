@@ -57,7 +57,7 @@ var DB = {
     var sql = "select * from " + table + " where " + where;
     pool.query(sql, params, function (err, rows, fields) {
       if (!rows || rows.length < 1) {
-        callback(errors.NOT_FOUND);
+        callback(errors.NOT_FOUND(table + ' 中不存在满足条件的值。'));
         return;
       }
       callback(err, rows[0]);

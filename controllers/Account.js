@@ -10,7 +10,7 @@ var Account = {
       if (err) return next(err);
       var dbPassword = account.password;
       if (dbPassword != utils.genPassword(password, account.salt)) {
-        return next(errors.WRONG_PASSWORD);
+        return next(errors.WRONG_PASSWORD('登录失败'));
       }
       req.session.user = account;
       res.send({code: 1});
@@ -28,14 +28,12 @@ var Account = {
     db.exists("account", "email=?", [email], function (err, exists) {
       if (err) return next(err);
       if (exists) {
-        var dupError = errors.DUPLICATED; dupError.message='Email [' + email + '] 已经存在.';
-        return next(dupError);
+        return next(errors.DUPLICATED('Email [' + email + '] 已经存在.'));
       }
       db.exists("account", "nick=?", [nick], function (err, exists) {
         if (err) return next(err);
         if (exists) {
-          var dupError2 = errors.DUPLICATED; dupError2.message='昵称 [' + nick + '] 已经存在.';
-          return next(dupError2);
+          return next(errors.DUPLICATED('nick [' + nick + '] 已经存在.'));
         }
         var salt = utils.genSalt();
         var newPassword = utils.genPassword(password, salt);

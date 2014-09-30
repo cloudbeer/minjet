@@ -1,4 +1,5 @@
 var db = require('../share/mysql/DB');
+var errors = require('../share/errors');
 
 var Project = {
   save: function(req, res, next){
@@ -37,6 +38,10 @@ var Project = {
       if (err) return next(err);
       res.send({code:1});
     });
+  },
+  delete: function(req, res, next){
+    var project_id = req.body.project_id;
+    if (!project_id) return next(errors.PARAMETER_REQUIRED('project_id 缺少'));
   }
 };
 
