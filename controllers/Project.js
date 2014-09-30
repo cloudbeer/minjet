@@ -39,9 +39,20 @@ var Project = {
       res.send({code:1});
     });
   },
-  delete: function(req, res, next){
+  delForce: function(req, res, next){
     var project_id = req.body.project_id;
     if (!project_id) return next(errors.PARAMETER_REQUIRED('project_id 缺少'));
+
+    var sql = "delete from milestone where project=:id;";
+    sql+="delete from project_member where project_id=:id;";
+    sql+="delete from milestone where project_id=:id;";
+    sql+="delete from task where project_id=:id;";
+    sql+="delete from history where project_id=:id;";
+    sql+="delete from project where id=:id;";
+    db.query(sql, {id: project_id}, function(err, affectRows){
+      if (err) return next(err);
+      res.send({code:1});
+    });
   }
 };
 
