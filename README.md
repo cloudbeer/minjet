@@ -76,6 +76,11 @@ DB.exists('account', "email=?", ['cloudbeer@gmail.com'], function(err, exists){
 
 传入 title content 等，保存项目，如果数据里有id字段，则是更新，否则是插入
 
+#### POST /api/project/delete
+
+in "project_id"，强制删除项目，同时会删除相关内容。
+
+
 #### 更多api尽在文件/routes/rest.js，更多数据结构参考数据库设计文档
 
 
