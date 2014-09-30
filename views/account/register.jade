@@ -33,15 +33,15 @@ block content
   script.
     $(function(){
       $("#btnRegister").click(function(){
-        $.post("/api/register",
+        $.post("/account/register",
         {
           email:$("#email").val(), 
           password:$("#password").val(), 
           nick: $("#nick").val()
         }, 
         function(res){
-          if (res.code==0){
-            alert(res.error);
+          if (res.code!=1){
+            alert(res.message);
             return;
           }
           alert("注册成功");

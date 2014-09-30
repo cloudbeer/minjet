@@ -1,29 +1,23 @@
-module.exports.NotFound = NotFound = function(message) {
-    this.name = "NotFound";
-    this.message = (message || "Not found.");
+var Errors = {
+  GENERAL_ERROR: function (message) {
+    return{code: 0, message: message || '一般错误'}
+  },
+  NOT_LOGIN: function (message) {
+    return{code: 1001, message: message || '未登录'}
+  },
+  WRONG_PASSWORD: function (message) {
+    return{code: 1002, message: message || '密码错误'}
+  },
+  NOT_FOUND: function (message) {
+    return{code: 1004, message: message || '没有找到'}
+  },
+  DUPLICATED: function (message) {
+    return{code: 1005, message: message || '重复的'}
+  },
+  PARAMETER_REQUIRED: function (message) {
+    return {code: 1007, message: message || '缺少参数'};
+  }
 };
-NotFound.prototype = Error.prototype;
-
-module.exports.Duplicated = Duplicated = function(message) {
-    this.name = "Duplicate";
-    this.message = (message || "Duplicated.");
-};
-Duplicated.prototype = Error.prototype;
-
-module.exports.PasswordWrong = PasswordWrong = function(message) {
-    this.name = "PasswordWrong";
-    this.message = (message || "Password is wrong.");
-};
-PasswordWrong.prototype = Error.prototype;
 
 
-module.exports.CanNotDelete = CanNotDelete = function(message) {
-  this.name = "CanNotDelete";
-  this.message = (message || "有外键关联，无法删除");
-};
-CanNotDelete.prototype = Error.prototype;
-
-
-
-
-
+module.exports = Errors;

@@ -4,21 +4,6 @@ var utils = require('../share/utils');
 var errors = require('../share/errors'); 
 
 var ProjectService = {
-  save: function(project, user_id, callback){
-  	if (project.id===undefined){
-  		project.creator = user_id;
-  	}else{
-  		project.updator = user_id;
-  		project.update_date = new Date();
-  	}
-    db.save("project", project, function(err, project2){
-      if (err){
-        if (callback) callback(err);
-        return;
-      }
-      callback(err, project2);
-    });
-  },
   load: function(id, callback){
   	db.loadById("project", id, function(err, project){
   		callback(err, project);

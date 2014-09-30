@@ -1,4 +1,5 @@
 var crypto = require('crypto');
+var errors = require('./errors');
 
 var Utils = {
   genPassword: function (password, salt) {
@@ -17,20 +18,15 @@ var Utils = {
   genSalt: function () {
     return Utils.randomString(16);
   },
-  isLogin: function (req, res, isAjax, back) {
-    if (req.session.user) {
-      return true;
+  checkLogin: function (req, res, back) {
+    if (!req.session.user) {
+      back = back || req.originalUrl;
+      var notLoginError = errors.NOT_LOGIN;
+      notLoginError.back = back;
+      throw(notLoginError);
     }
-    back = back || req.originalUrl;
-    if (isAjax) {
-      res.send({code: 0, error: '没有登录', back: back});
-    }else{
-      res.redirect('/login?back=' + encodeURIComponent(back));
-    }
-    return false;
   }
 
 };
-
 
 module.exports = Utils;

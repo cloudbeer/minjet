@@ -4,9 +4,8 @@ var utils = require('../share/utils')
 
 //首页
 router.get('/', function(req, res) {
-  if (utils.isLogin(req, res)){
-    res.render('index', {title: 'Home'});
-  }
+  utils.checkLogin(req, res);
+  res.render('index', {title: 'Home'});
 });
 //注册
 router.get("/register", function (req, res) {

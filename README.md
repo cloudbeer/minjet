@@ -52,13 +52,13 @@ DB.exists('account', "email=?", ['cloudbeer@gmail.com'], function(err, exists){
 ```
 
 ##API for front-end
-#### POST /api/login
+#### POST /account/login
 
- email, password
+ 登录 email, password
 
-#### POST /api/register
+#### POST /account/register
 
- email, password, nick
+ 注册 email, password, nick
 
 #### GET /api/account/find_nick/:nick
 
@@ -72,9 +72,14 @@ DB.exists('account', "email=?", ['cloudbeer@gmail.com'], function(err, exists){
 
 我创建的项目，需要先登录才能访问
 
-#### /api/project/save
+#### POST /api/project/save
 
-POST title content 等
+传入 title content 等，保存项目，如果数据里有id字段，则是更新，否则是插入
+
+#### POST /api/project/delete
+
+in "project_id"，强制删除项目，同时会删除相关内容。
+
 
 #### 更多api尽在文件/routes/rest.js，更多数据结构参考数据库设计文档
 
