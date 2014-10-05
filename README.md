@@ -117,5 +117,5 @@ DB.exists('account', "email=?", ['cloudbeer@gmail.com'], function(err, exists){
 
 为任务分配责任人/所有者
 
-#### 更多api尽在文件/routes/rest.js，更多数据结构参考数据库设计文档
+#### 更多api尽在文件/routes/rest.js，更多数据结构参考数据库设计文档，数据库字段设计可直接映射到前端。
 
