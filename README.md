@@ -52,6 +52,7 @@ DB.exists('account', "email=?", ['cloudbeer@gmail.com'], function(err, exists){
 ```
 
 ##API for front-end
+
 #### POST /account/login
 
  登录 email, password
@@ -78,23 +79,43 @@ DB.exists('account', "email=?", ['cloudbeer@gmail.com'], function(err, exists){
 
 #### POST /api/project/delete
 
-in "project_id"，强制删除项目，同时会删除相关内容。
+传入 "project_id"，强制删除项目，同时会删除相关内容。
 
 #### POST /api/project/add-member
 
 为项目增加用户
 
-
 #### POST /api/milestone/save
 
 保存里程碑（冲刺）
+
+#### GET /api/milestone/mine
+
+我创建的里程碑列表
+
+#### GET /api/milestone/mine/p/:project_id
+
+指定项目里我创建的里程碑列表
 
 #### POST /api/task/save
 
 保存任务
 
+#### GET /api/task/mine
+
+我的任务列表
+
+#### GET /api/task/mine/p/：project_id
+
+指定项目中我的任务列表
+
+#### GET /api/task/mine/m/:milestone_id
+
+指定里程碑中我的任务列表
+
+#### POST /api/task/assign
+
+为任务分配责任人/所有者
+
 #### 更多api尽在文件/routes/rest.js，更多数据结构参考数据库设计文档
 
-
-###TODO
-* register.jade 没有做前端校验。

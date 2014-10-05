@@ -42,6 +42,27 @@ var Task = {
         res.send({code: 1, data: task2});
       })
     });
-  }
+  },
+  mine: function(req, res, next){
+    var mine_id = req.session.user.id;
+    var xsql = "owner=?";
+    var xparams = [mine_id];
 
+    if (req.params.hasOwnProperty("proejct_id")){
+      xsql += " and project_id=?";
+      xparams.push(req.params.project_id);
+    }
+    if (req.params.hasOwnProperty("milestone_id")){
+      xsql += " and milestone_id=?";
+      xparams.push(req.params.project_id);
+    }
+
+    db.list("task", xsql + " order by id desc limit 0, 100", xparams, function(err, tasks){
+      if (err) return next(err);
+      res.send({code:1, data: tasks});
+    });
+  }
 };
+
+
+module.exports = Task;
