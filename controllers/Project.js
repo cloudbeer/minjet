@@ -32,8 +32,9 @@ var Project = {
     });
   },
   addMember: function(req, res, next){
-    //var project_id = req.body.project_id, account_id=req.body.account_id， role: req.body,;
+    //这里没有判断权限，应该是有权限的人才可以加入成员
     var project_member = req.body; // {project_id: project_id, account_id: account_id, role: role};
+    project_member.creator = req.session.user.id;
     db.save("project_member", project_member, function(err, model){
       if (err) return next(err);
       res.send({code:1});

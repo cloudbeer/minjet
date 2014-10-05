@@ -13,6 +13,7 @@ router.get("/api/project/mine", Project.mine);
 router.get("/api/project/detail/:id", Project.detail);
 router.post("/api/project/save", Project.save);
 router.post("/api/project/delete", Project.delForce); //这个删除是强制删除
+router.post("/api/project/add_member", Project.addMember);
 
 
 module.exports = router;
