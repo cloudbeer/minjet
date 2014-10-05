@@ -37,7 +37,7 @@ var Project = {
     project_member.creator = req.session.user.id;
     var project_id = req.body.project_id;
 
-    utils.checkProjectOwner(project_id, user_id, function(){
+    utils.checkProjectManager(project_id, user_id, function(){
       db.save("project_member", project_member, function(err, model){
         if (err) return next(err);
         res.send({code:1});

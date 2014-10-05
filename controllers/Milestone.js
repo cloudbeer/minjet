@@ -9,9 +9,9 @@ var Milestone = {
     var user_id = req.session.user.id;
 
     if (!project_id || project_id <= 0) {
-      throw errors.PARAMETER_REQUIRED("project_id required.");
+      return next(errors.PARAMETER_REQUIRED("project_id required."));
     }
-    utils.checkProjectOwner(project_id, user_id, function () {
+    utils.checkProjectManager(project_id, user_id, function () {
       if (mileStone.hasOwnProperty("id") && mileStone.id > 0) {
         mileStone.updator = user_id;
         mileStone.update_date = new Date();

@@ -18,4 +18,8 @@ router.post("/api/project/add-member", Project.addMember);
 var Milestone = require('../controllers/Milestone');
 router.post('/api/milestone/save', Milestone.save);
 
+var Task = require('../controllers/Task');
+router.post('/api/task/save', Task.save);
+router.post('/api/task/assign', Task.assign);
+
 module.exports = router;

@@ -27,14 +27,23 @@ var Utils = {
       throw(notLoginError);
     }
   },
-  checkProjectOwner: function (project_id, user_id, callback) {
+  checkProjectManager: function (project_id, user_id, callback) {
+    //TODO: 这里逻辑待强化，创建者，项目经理均有权限才对
     db.exists("project", "id=? and creator=?", [project_id, user_id], function(err, isExists){
       if (err) throw err;
       if (!isExists) throw errors.NOT_AUTHORIZED("您没有此项目的权限");
       callback();
+    });
+  },
+  checkTaskManager: function(task_id, user_id, callback){
+    db.loadById("task", task_id, function(err, task){
+      if (err) throw err;
+      Utils.checkProjectManager(task.project_Id, user_id, callback);
     });
   }
 
 };
 
 module.exports = Utils;
+
+//TODO: error 模型，这里是应该throw，还是放到 callback，待实验。

@@ -85,6 +85,13 @@ in "project_id"，强制删除项目，同时会删除相关内容。
 为项目增加用户
 
 
+#### POST /api/milestone/save
+
+保存里程碑（冲刺）
+
+#### POST /api/task/save
+
+保存任务
 
 #### 更多api尽在文件/routes/rest.js，更多数据结构参考数据库设计文档
 
