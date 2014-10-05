@@ -60,11 +60,11 @@ DB.exists('account', "email=?", ['cloudbeer@gmail.com'], function(err, exists){
 
  注册 email, password, nick
 
-#### GET /api/account/find_nick/:nick
+#### GET /api/account/find-nick/:nick
 
 精确找到 nick 的用户
 
-#### GET /api/account/list_nick/:nick
+#### GET /api/account/list-nick/:nick
 
 模糊匹配 nick 的用户列表
 
@@ -79,6 +79,11 @@ DB.exists('account', "email=?", ['cloudbeer@gmail.com'], function(err, exists){
 #### POST /api/project/delete
 
 in "project_id"，强制删除项目，同时会删除相关内容。
+
+#### POST /api/project/add-member
+
+为项目增加用户
+
 
 
 #### 更多api尽在文件/routes/rest.js，更多数据结构参考数据库设计文档
