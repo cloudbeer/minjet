@@ -15,5 +15,7 @@ router.post("/api/project/save", Project.save);
 router.post("/api/project/delete", Project.delForce); //这个删除是强制删除
 router.post("/api/project/add-member", Project.addMember);
 
+var Milestone = require('../controllers/Milestone');
+router.post('/api/milestone/save', Milestone.save);
 
 module.exports = router;

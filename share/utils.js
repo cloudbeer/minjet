@@ -1,5 +1,6 @@
 var crypto = require('crypto');
 var errors = require('./errors');
+var db = require('../share/mysql/DB');
 
 var Utils = {
   genPassword: function (password, salt) {
@@ -25,6 +26,13 @@ var Utils = {
       notLoginError.back = back;
       throw(notLoginError);
     }
+  },
+  checkProjectOwner: function (project_id, user_id, callback) {
+    db.exists("project", "id=? and creator=?", [project_id, user_id], function(err, isExists){
+      if (err) throw err;
+      if (!isExists) throw errors.NOT_AUTHORIZED("您没有此项目的权限");
+      callback();
+    });
   }
 
 };

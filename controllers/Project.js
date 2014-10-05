@@ -35,10 +35,16 @@ var Project = {
     //这里没有判断权限，应该是有权限的人才可以加入成员
     var project_member = req.body; // {project_id: project_id, account_id: account_id, role: role};
     project_member.creator = req.session.user.id;
-    db.save("project_member", project_member, function(err, model){
-      if (err) return next(err);
-      res.send({code:1});
+    var project_id = req.body.project_id;
+
+    utils.checkProjectOwner(project_id, user_id, function(){
+      db.save("project_member", project_member, function(err, model){
+        if (err) return next(err);
+        res.send({code:1});
+      });
     });
+
+
   },
   delForce: function(req, res, next){
     var project_id = req.body.project_id;

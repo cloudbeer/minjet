@@ -16,6 +16,9 @@ var Errors = {
   },
   PARAMETER_REQUIRED: function (message) {
     return {code: 1007, message: message || '缺少参数'};
+  },
+  NOT_AUTHORIZED: function (message) {
+    return {code: 1008, message: message || '没有权限'};
   }
 };
 
