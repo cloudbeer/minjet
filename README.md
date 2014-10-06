@@ -81,6 +81,14 @@ DB.exists('account', "email=?", ['cloudbeer@gmail.com'], function(err, exists){
 
 传入 "project_id"，强制删除项目，同时会删除相关内容。
 
+#### GET /api/project/:id/milestones
+
+指定项目下的里程碑列表
+
+#### GET /api/project/:id/backlogs
+
+指定项目下的堆积任务列表
+
 #### POST /api/project/add-member
 
 为项目增加用户
@@ -96,6 +104,10 @@ DB.exists('account', "email=?", ['cloudbeer@gmail.com'], function(err, exists){
 #### GET /api/milestone/mine/p/:project_id
 
 指定项目里我创建的里程碑列表
+
+#### GET /api/milestone/:id/tasks
+
+指定里程碑下的任务列表
 
 #### POST /api/task/save
 
@@ -116,6 +128,11 @@ DB.exists('account', "email=?", ['cloudbeer@gmail.com'], function(err, exists){
 #### POST /api/task/assign
 
 为任务分配责任人/所有者
+
+#### POST /api/task/assign-milestone
+
+为任务分配里程碑
+
 
 #### 更多api尽在文件/routes/rest.js，更多数据结构参考数据库设计文档，数据库字段设计可直接映射到前端。
 

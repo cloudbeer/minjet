@@ -48,7 +48,7 @@ var Project = {
   },
   delForce: function(req, res, next){
     var project_id = req.body.project_id;
-    if (!project_id) return next(errors.PARAMETER_REQUIRED('project_id 缺少'));
+    if (!project_id) return next(errors.PARAMETER_REQUIRED('project_id required'));
 
     var sql = "delete from milestone where project=:id;";
     sql+="delete from project_member where project_id=:id;";
@@ -60,6 +60,24 @@ var Project = {
       if (err) return next(err);
       res.send({code:1});
     });
+  },
+  milestones: function(req, res, next){
+    var project_id = req.params.id;
+    var pageSize = 100;
+    var page = 1;
+    db.list('milestone', 'project_id=? order by id', [project_id], function(err, milestones){
+      if (err) return next(err);
+      res.send({code:1, data: milestones});
+    }, pageSize, page);
+  },
+  backlogs: function(req, res, next){
+    var project_id = req.params.id;
+    var pageSize = 100;
+    var page = 1;
+    db.list('task', 'project_id=? order by id desc', [project_id], function(err, tasks){
+      if (err) return next(err);
+      res.send({code:1, data: tasks});
+    }, pageSize, page);
   }
 };
 

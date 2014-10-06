@@ -10,7 +10,7 @@ var Task = {
     var user_id = req.session.user.id;
 
     if (!project_id || project_id <= 0) {
-      throw errors.PARAMETER_REQUIRED("project_id required.");
+      return next( errors.PARAMETER_REQUIRED("project_id required."));
     }
     utils.checkProjectManager(project_id, user_id, function () {
       if (mileStone.hasOwnProperty("id") && mileStone.id > 0) {
@@ -61,6 +61,20 @@ var Task = {
       if (err) return next(err);
       res.send({code:1, data: tasks});
     });
+  },
+  assignMilestone: function(req,res,next){
+    var task_id = req.body.task_id;
+    var milestone_id = req.body.milestone_id;
+    if (!task_id || !milestone_id || task_id<=0||milestone_id<=0){
+      return next( errors.PARAMETER_REQUIRED("task_id and milestone_id required."));
+    }
+
+    var task = {id: task_id, milestone_id: milestone_id};
+    db.save("task", task, function(err, task2){
+      if (err) return next(err);
+      res.send({code:1});
+    });
+
   }
 };
 

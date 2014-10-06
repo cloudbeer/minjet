@@ -38,8 +38,17 @@ var Milestone = {
       if (err) return next(err);
       res.send({code:1, data: milestones});
     });
-
+  },
+  tasks: function(req, res, next){
+    var milestone_id = req.params.id;
+    var pageSize = 100;
+    var page = 1;
+    db.list('task', 'milestone_id=? order by id desc', [milestone_id], function(err, tasks){
+      if (err) return next(err);
+      res.send({code:1, data: tasks});
+    }, pageSize, page);
   }
+
 
 };
 
