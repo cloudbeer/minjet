@@ -117,7 +117,7 @@ DB.exists('account', "email=?", ['cloudbeer@gmail.com'], function(err, exists){
 
 我的任务列表
 
-#### GET /api/task/mine/p/：project_id
+#### GET /api/task/mine/p/:project_id
 
 指定项目中我的任务列表
 

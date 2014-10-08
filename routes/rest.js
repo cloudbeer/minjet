@@ -30,7 +30,7 @@ var Task = require('../controllers/Task');
 router.get('/api/task/mine', Task.mine);
 router.post('/api/task/save', Task.save);
 router.post('/api/task/assign', Task.assign);
-router.get('/api/task/mine/p/：project_id', Task.mine); //指定项目下的
+router.get('/api/task/mine/p/:project_id', Task.mine); //指定项目下的
 router.get('/api/task/mine/m/:milestone_id', Task.mine); //指定里程碑下的
 router.post('/api/task/assign-milestone', Task.assignMilestone);
 

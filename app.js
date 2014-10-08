@@ -59,8 +59,9 @@ app.use(function (req, res, next) {
 var errors = require('./share/errors');
 
 app.use(function (err, req, res, next) {
-  if (req.xhr) {
-    res.send(err.status || 288, err);
+  console.log(err);
+  if (err || req.xhr) {
+    res.status(err.status || 288).send(err);
   } else if (err.code === errors.NOT_LOGIN.code) {
     res.redirect("/login?back=" + encodeURIComponent(err.back));
   } else {

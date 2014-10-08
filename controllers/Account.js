@@ -3,9 +3,12 @@ var utils = require('../share/utils');
 var errors = require('../share/errors');
 
 var Account = {
-  login: function(req, res){
+  login: function(req, res, next){
+    //console.log(req.body);
+
     var email = req.body.email;
     var password = req.body.password;
+    if (!email || !password) return next(errors.PARAMETER_REQUIRED("email 和 password 都必须输入。"));
     db.load("account", "email=?", [email], function (err, account) {
       if (err) return next(err);
       var dbPassword = account.password;
