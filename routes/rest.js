@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
+var CookieUtil = require('../controllers/CookieUtil');
+router.get('/get-session-id', CookieUtil.getId);
+
 var Account = require('../controllers/Account');
 router.post("/account/register", Account.register);
 router.post("/account/login", Account.login);
@@ -30,7 +33,6 @@ router.post('/api/task/assign', Task.assign);
 router.get('/api/task/mine/p/：project_id', Task.mine); //指定项目下的
 router.get('/api/task/mine/m/:milestone_id', Task.mine); //指定里程碑下的
 router.post('/api/task/assign-milestone', Task.assignMilestone);
-
 
 
 module.exports = router;

@@ -24,7 +24,7 @@ var Utils = {
       back = back || req.originalUrl;
       var notLoginError = errors.NOT_LOGIN;
       notLoginError.back = back;
-      throw(notLoginError);
+      throw notLoginError;
     }
   },
   checkProjectManager: function (project_id, user_id, callback) {

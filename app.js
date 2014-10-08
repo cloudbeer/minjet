@@ -12,8 +12,9 @@ var app = express();
 //session setup
 app.use(session({
   resave: false, // don't save session if unmodified
-  saveUninitialized: false, // don't create session until something stored
-  secret: 'minjet blabla'
+  saveUninitialized: true, // don't create session until something stored
+  secret: 'minjet blabla',
+  //cookie: { httpOnly: false }
 }));
 
 // view engine setup
@@ -21,7 +22,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(__dirname + '/res/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -32,6 +33,7 @@ app.use('/res', express.static(path.join(__dirname, 'res')));
 // session 拦截
 var utils = require('./share/utils');
 app.use("/api/", function (req, res, next) {
+  console.log('begin api....');
   utils.checkLogin(req, res);
   next();
 });
