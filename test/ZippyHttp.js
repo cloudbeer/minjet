@@ -4,6 +4,7 @@ var fs = require('fs');
 
 
 var setCookie = function (headers) {
+  if (!fs.existsSync('./cookie-temp')) return;
   var cookieInStore = fs.readFileSync('./cookie-temp', 'utf-8');
   //console.log('old cookie: ' + cookieInStore);
   headers.Cookie = cookieInStore;
@@ -72,8 +73,9 @@ var post = module.exports.post = function (urlStr, params, callback) {
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
     'Content-Length': Buffer.byteLength(kvStr)
   };
-  //setCookie(headers);
+  setCookie(headers);
   options.headers = headers;
+  console.log(headers);
 
   var req = http.request(options, function (res) {
     //console.log('STATUS: ' + res.statusCode);

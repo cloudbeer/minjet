@@ -8,11 +8,12 @@ var post = function (url, params, callback) {
   ZippyHttp.post("http://localhost:3000" + url, params, callback);
 };
 
-/*
- get( "http://localhost:3000/api/account/list-nick/cloudbeer", function(chunck){
- console.log("这个是我希望的结果：" + chunck);
- });
- */
+
+
+//get("http://localhost:3000/api/account/list-nick/cloudbeer", function (chunck) {
+//  console.log("这个是我希望的结果：" + chunck);
+//});
+
 
 
 //ZippyHttp.login('cloudbeer@gmail.com', '111');
@@ -26,14 +27,17 @@ var post = function (url, params, callback) {
 //  console.log("这个是我希望的结果：" + chunck);
 //});
 
-post("/api/milestone/save",
-  {
-    title: 'sprint1',
-    content: 'it is a sprint',
-    project_id: 4,
-    start_date: '2014-10-1',
-    end_date: '2014-11-11'
-  },
-  function (chunk) {
-    console.log(chunk);
-  });
+//post("/api/milestone/save",
+//  {
+//    title: '冲刺2 hi',
+//    content: '我们都有我们的冲刺，一二三，预备起',
+//    project_id: 4,
+//    start_date: '2014-10-10',
+//    end_date: '2014-10-24'
+//  },
+//  function (chunk) {
+//    console.log(chunk);
+//  });
+
+
+//get("/api/project/4/milestones", function (chunk) { console.log(chunk) });

@@ -11,10 +11,10 @@ var app = express();
 
 //session setup
 app.use(session({
-  resave: false, // don't save session if unmodified
-  saveUninitialized: true, // don't create session until something stored
-  secret: 'minjet blabla',
-  //cookie: { httpOnly: false }
+    resave: false, // don't save session if unmodified
+    saveUninitialized: true, // don't create session until something stored
+    secret: 'minjet blabla',
+    //cookie: { httpOnly: false }
 }));
 
 // view engine setup
@@ -33,9 +33,9 @@ app.use('/res', express.static(path.join(__dirname, 'res')));
 // session 拦截
 var utils = require('./share/utils');
 app.use("/api/", function (req, res, next) {
-  console.log('begin api....');
-  utils.checkLogin(req, res);
-  next();
+    console.log('begin api....');
+    utils.checkLogin(req, res);
+    next();
 });
 
 
@@ -48,9 +48,9 @@ app.use('/', routes_rest);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handlers
@@ -59,14 +59,16 @@ app.use(function (req, res, next) {
 var errors = require('./share/errors');
 
 app.use(function (err, req, res, next) {
-  console.log(err);
-  if (err || req.xhr) {
-    res.status(err.status || 288).send(err);
-  } else if (err.code === errors.NOT_LOGIN.code) {
-    res.redirect("/login?back=" + encodeURIComponent(err.back));
-  } else {
-    next(err);
-  }
+    //console.log(err);
+    if (err && req.xhr) {
+      res.status(err.status || 288).send(err);
+      //console.log(err);
+      //res.send(err);
+    } else if (err && (err.code === errors.NOT_LOGIN.code)) {
+        res.redirect("/login?back=" + encodeURIComponent(err.back));
+    } else {
+        next(err);
+    }
 });
 
 /*
@@ -87,11 +89,11 @@ app.use(function (err, req, res, next) {
 // production error handler
 // no stacktraces leaked to user
 app.use(function (err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: err
-  });
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: err
+    });
 });
 
 

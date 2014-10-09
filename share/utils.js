@@ -22,7 +22,7 @@ var Utils = {
   checkLogin: function (req, res, back) {
     if (!req.session.user) {
       back = back || req.originalUrl;
-      var notLoginError = errors.NOT_LOGIN;
+      var notLoginError = errors.NOT_LOGIN();
       notLoginError.back = back;
       throw notLoginError;
     }

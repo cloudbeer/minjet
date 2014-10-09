@@ -8,6 +8,8 @@ var Milestone = {
     var project_id = req.body.project_id;
     var user_id = req.session.user.id;
 
+    console.log(req.body);
+
     if (!project_id || project_id <= 0) {
       return next(errors.PARAMETER_REQUIRED("project_id required."));
     }
