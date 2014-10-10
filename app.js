@@ -59,12 +59,11 @@ app.use(function (req, res, next) {
 var errors = require('./share/errors');
 
 app.use(function (err, req, res, next) {
-    //console.log(err);
-    if (err && req.xhr) {
+    if (req.xhr) {
       res.status(err.status || 288).send(err);
       //console.log(err);
       //res.send(err);
-    } else if (err && (err.code === errors.NOT_LOGIN.code)) {
+    } else if (err.code === errors.NOT_LOGIN().code) {
         res.redirect("/login?back=" + encodeURIComponent(err.back));
     } else {
         next(err);

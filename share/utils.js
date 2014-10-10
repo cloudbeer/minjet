@@ -19,7 +19,7 @@ var Utils = {
   genSalt: function () {
     return Utils.randomString(16);
   },
-  checkLogin: function (req, res, back) {
+  checkLogin: function (req, res, next, back) {
     if (!req.session.user) {
       back = back || req.originalUrl;
       var notLoginError = errors.NOT_LOGIN();
