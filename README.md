@@ -11,21 +11,8 @@ Agile Project Management 敏捷项目管理
 
 * This is a Express web app
 * Server side Template engine is Jade
-* Client side Template engine is doT
+* Client side 使用 Angular
 * Orm .... 自己写的简单的ORM，参考下面
-
-
-###一些约定
-
-web json 数据交互的格式：
-
-成功的请求
-
-{code: 1}
-
-失败的请求
-
-{code: 0, message:'登录失败'} 
 
 
 ###Simple ORM 
