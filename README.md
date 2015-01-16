@@ -5,6 +5,7 @@ Agile Project Management 敏捷项目管理
 
 * 服务器端代码库：npm install
 * 客户端代码库： bower install
+* 客户端准备使用：AngularJS
 * 启动: bin/www
 
 ## 一些技术
