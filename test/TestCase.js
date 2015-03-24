@@ -19,9 +19,9 @@ var post = function (url, params, callback) {
 //ZippyHttp.login('cloudbeer@gmail.com', '111');
 //return;
 
-//get("/api/project/mine", function(chunck){
-//  console.log("这个是我希望的结果：" + chunck);
-//});
+get("/api/project/mine", function(chunck){
+  console.log("这个是我希望的结果：" + chunck);
+});
 
 //get("/api/project/4/milestones", function(chunck){
 //  console.log("这个是我希望的结果：" + chunck);
